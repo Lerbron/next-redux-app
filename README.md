@@ -7,5 +7,5 @@
 #### 2、开发环境启动 yarn run dev
 #### 3、生产环境
 
-打包 yarn run build
-启动服务 yarn start
+##### 打包 yarn run build
+##### 启动服务 yarn start
