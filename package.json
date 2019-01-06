@@ -4,11 +4,15 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "start-express-d": "cross-env NODE_ENV=dev node server.js",
+    "start-express-p": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
     "axios": "^0.18.0",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.4",
     "next": "^7.0.2",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",

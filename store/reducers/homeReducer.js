@@ -6,7 +6,6 @@ const initialState = {
   homeList: []
 }
 export default function homeReducer (state = initialState, action){
-  console.log('action:', action)
   switch (action.type) {
     
     case actionTypes.INCREMENT:
