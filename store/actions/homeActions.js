@@ -43,22 +43,53 @@ function fetchHomeListErr(err) {
 }
 
 
-function requestHomeList(page = 1, limit = 10) {
-	return dispatch => {
-		dispatch(fetchHomeList(page));
+// function requestHomeList(page = 1, limit = 10) {
+// 	return dispatch => {
+// 		dispatch(fetchHomeList(page));
 
-		http.get(`/api/v1/topics?page=${page}&limit=${limit}`).then(res => {
-			dispatch(receiveHomeList(res.data.data));
+// 		http.get(`/api/v1/topics?page=${page}&limit=${limit}`).then(res => {
+// 			dispatch(receiveHomeList(res.data.data));
+// 		})
+// 			.catch(err => {
+// 				dispatch(fetchHomeListErr(err))
+// 			})
+// 	}
+// }
+
+function requestHomeList(page= 1, limit= 10) {
+	return function(dispatch) {
+		return new Promise(function(resolve, reject) {
+			dispatch(fetchHomeList(page));
+			http.get(`/api/v1/topics?page=${page}&limit=${limit}`)
+				.then(res => {
+					dispatch(receiveHomeList(res.data.data));
+					resolve && resolve(res);
+				}, err =>{
+					dispatch(fetchHomeListErr( JSON.parse( JSON.stringify(err) ) ));
+					reject && reject(JSON.parse(JSON.stringify(err)))
+				})
+				.catch(err => {
+					err = err || '网络错误！';
+					dispatch(fetchHomeListErr( JSON.parse( JSON.stringify(err) ) ));
+					reject && reject(JSON.parse(JSON.stringify(err)));
+				})
 		})
-			.catch(err => {
-				dispatch(fetchHomeListErr(err))
-			})
 	}
 }
+
+// let requestHomeList = (page= 1, limit= 10) => dispatch => new Promise(function(resolve, reject) {
+// 	http.get(`/api/v1/topics?page=${page}&limit=${limit}`)
+// 		.then(res => {
+// 			dispatch(receiveHomeList(res.data.data));
+// 			resolve && resolve(res)
+// 		}, err =>{
+// 			reject && reject(JSON.parse(JSON.stringify(err)))
+// 		})
+// })
 
 export {
   add,
 	minus,
 	receiveHomeList,
-  requestHomeList
+	requestHomeList
 }

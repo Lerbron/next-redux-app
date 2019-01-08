@@ -24,6 +24,11 @@ class Index extends React.Component {
 
   fetchNextPage = () => {
     this.props.fetchHomeList(2)
+      .then(res => {
+        console.log('res:', res)
+      }, err => {
+        console.log('qqqq', err)
+      })
   }
 
   render () {
