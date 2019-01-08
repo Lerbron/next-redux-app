@@ -31,6 +31,7 @@ class Index extends React.Component {
     return (
       <Head title='home page'>
       <div>
+        <img src='/static/imgs/banner1.png' alt='banner' />
         <Link href='/detail'><a>to detail</a></Link>
         <button onClick={this.fetchNextPage}>下一页</button>
         <Examples />

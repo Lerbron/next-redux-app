@@ -28,7 +28,7 @@ export default function homeReducer (state = initialState, action){
     case actionTypes.FETCH_HOME_LIST_ERR:
       return Object.assign({}, state, {
         fetching: false,
-        err: actions.err
+        err: action.err
       })
     default:
       return state
