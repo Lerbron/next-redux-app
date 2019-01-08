@@ -36,7 +36,11 @@ class Index extends React.Component {
         <Examples />
         {
           homeList.length > 0 && homeList.map((item, idx) => {
-            return (<p className='title' key={idx}>{item.title}</p>)
+            return (
+              <div key={idx}>
+                <p className='title' >{item.title}</p>
+                <div dangerouslySetInnerHTML={{__html: item.content}} />
+              </div>)
           })
         }
       </div>
