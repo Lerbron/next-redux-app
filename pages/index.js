@@ -5,6 +5,7 @@ import Link from 'next/link';
 import http from './../utils/fetch'
 import { requestHomeList, receiveHomeList } from './../store/actions/homeActions';
 import Head from './../components/layout';
+import Router from 'next/router'
 
 
 class Index extends React.Component {
@@ -31,6 +32,15 @@ class Index extends React.Component {
       })
   }
 
+  _onClick = () => {
+    Router.push({
+      pathname: '/info/detail',
+      query: {
+        id: 1
+      }
+    }, '/info/detail/1')
+  }
+
   render () {
     let {homeList} = this.props;
     return (
@@ -38,7 +48,8 @@ class Index extends React.Component {
       <div>
         <img src='/static/imgs/banner1.png' alt='banner' />
         <Link href='/info/detail?id=111' as = '/info/detail/111'><a>to detail</a></Link>
-        <Link href='/user/info?id=111' as = '/user/info/111'><a>to detail</a></Link>
+        <span onClick={this._onClick}>to detail</span>
+        {/* <Link href='/user/info?id=111' as = '/user/info/111'><a>to detail</a></Link> */}
         <button onClick={this.fetchNextPage}>下一页</button>
         <Examples />
         {
